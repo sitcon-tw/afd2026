@@ -3,7 +3,7 @@ import './style.css'
 document.addEventListener('DOMContentLoaded', () => {
   // Intersection Observer for scroll reveal animations
   const revealElements = document.querySelectorAll('.reveal');
-  
+
   const revealCallback = (entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -19,14 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
-  
+
   revealElements.forEach(el => {
     revealObserver.observe(el);
   });
-  
+
   console.log("Notepad++++ loaded perfectly without any ModuleNotFoundError!");
   console.log("Welcome to the ultimate IDE experience.");
-  
+
   createMascots(30); // 生成多個會飛的吉祥物！
 });
 
@@ -47,23 +47,23 @@ function createMascots(num) {
 
   for (let i = 0; i < num; i++) {
     const img = document.createElement('img');
-    img.src = '/stone.png';
+    img.src = `${import.meta.env.BASE_URL}stone.png`;
     img.alt = 'Mascot Stone';
     img.style.position = 'absolute';
     img.style.top = '0';
     img.style.left = '0';
     img.style.margin = '0';
-    
+
     // 隨機大小、透明度
-    const size = 30 + Math.random() * 50; 
+    const size = 30 + Math.random() * 50;
     img.style.width = `${size}px`;
     img.style.opacity = (0.3 + Math.random() * 0.7).toString();
     img.style.filter = 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.4))';
-    
+
     // 隨機初始位置與速度、旋轉角度
     let x = Math.random() * (window.innerWidth - size);
     let y = Math.random() * (window.innerHeight - size);
-    let dx = (Math.random() - 0.5) * 5; 
+    let dx = (Math.random() - 0.5) * 5;
     let dy = (Math.random() - 0.5) * 5;
     let rot = Math.random() * 360;
     let drot = (Math.random() - 0.5) * 6;
@@ -85,7 +85,7 @@ function createMascots(num) {
       // 碰到螢幕邊緣反彈
       if (m.x <= 0) { m.dx = Math.abs(m.dx); m.x = 0; }
       if (m.x + m.size >= window.innerWidth) { m.dx = -Math.abs(m.dx); m.x = window.innerWidth - m.size; }
-      
+
       if (m.y <= 0) { m.dy = Math.abs(m.dy); m.y = 0; }
       if (m.y + m.size >= window.innerHeight) { m.dy = -Math.abs(m.dy); m.y = window.innerHeight - m.size; }
 
@@ -93,6 +93,6 @@ function createMascots(num) {
     });
     requestAnimationFrame(animate);
   }
-  
+
   animate();
 }
